@@ -1,5 +1,10 @@
 package com.company;
 
+import com.company.annotations.AnyOf;
+import com.company.annotations.Constrained;
+import com.company.annotations.NotNull;
+import com.company.annotations.Size;
+
 import java.util.Collections;
 import java.util.List;
 

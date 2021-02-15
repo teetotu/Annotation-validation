@@ -1,5 +1,10 @@
 package com.company;
 
+import com.company.annotations.Constrained;
+import com.company.annotations.InRange;
+import com.company.annotations.NotBlank;
+import com.company.annotations.NotNull;
+
 @Constrained
 public class GuestForm {
     @NotNull
