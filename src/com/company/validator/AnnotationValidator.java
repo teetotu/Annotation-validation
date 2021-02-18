@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MyValidator implements Validator {
+public class AnnotationValidator implements Validator {
     @Override
     public Set<ValidationError> validate(Object object) {
         if (!object.getClass().isAnnotationPresent(Constrained.class)) {
@@ -29,6 +29,8 @@ public class MyValidator implements Validator {
                     Arrays.stream(it.getAnnotatedType().getDeclaredAnnotations())
                             .forEach(itt2 -> System.out.println("\t" + itt2));
                 });
+
+//        Arrays.stream(object.getClass().getDeclaredFields()).forEach();
 
         return validationErrors;
     }

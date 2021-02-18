@@ -3,7 +3,7 @@ package com.company.validator;
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class BaseValidatorActions {
+public class BaseAnnotationValidatorActions {
 
     /**
      * @param object List<T>, Set<T>, Map<K, V>, String
