@@ -1,4 +1,4 @@
-package com.company;
+package com.company.booking;
 
 import com.company.annotations.Constrained;
 import com.company.annotations.InRange;

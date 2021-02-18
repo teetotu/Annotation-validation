@@ -1,4 +1,4 @@
-package com.company;
+package com.company.booking;
 
 import com.company.annotations.AnyOf;
 import com.company.annotations.Constrained;
@@ -24,6 +24,7 @@ public class BookingForm {
     public BookingForm(List<GuestForm> guests, List<String> amenities, String propertyType) {
         this.guests = guests;
         this.amenities = amenities;
+        this.propertyType = propertyType;
     }
 
     public String getPropertyType() {

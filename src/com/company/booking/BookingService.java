@@ -1,4 +1,4 @@
-package com.company;
+package com.company.booking;
 
 import java.util.List;
 
