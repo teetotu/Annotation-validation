@@ -11,7 +11,7 @@ import java.util.List;
 @Constrained
 public class BookingForm {
     @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 2)
     private List<@NotNull GuestForm> guests;
 
     @NotNull

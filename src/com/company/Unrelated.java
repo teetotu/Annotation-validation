@@ -1,29 +1,24 @@
 package com.company;
 
-import com.company.annotations.Constrained;
-import com.company.annotations.InRange;
-import com.company.annotations.NotNull;
-import com.company.annotations.Size;
+import com.company.annotations.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Constrained
 public class Unrelated {
     @NotNull
-    String str;
+    Set<@Positive Integer> notNullSet = new HashSet<>();
 
-    @Size(min = 5, max = 10)
-    List<@InRange(min = 1, max = 4) Integer> integerList;
+    @NotNull
+    static List<@NotNull String> integerList = new ArrayList<>();
 
-    @Constrained
-    static class UnrelatedInner1 {
-        @NotNull
-        String strInner;
-    }
+    static {
+        integerList.add(null);
+        integerList.add("String1");
+        integerList.add("String2");
 
-    @Constrained
-    static class UnrelatedInner2 {
-        @NotNull
-        String strInner;
     }
 }
