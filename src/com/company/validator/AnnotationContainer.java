@@ -3,8 +3,10 @@ package com.company.validator;
 import com.company.annotations.*;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class AnnotationContainer {
@@ -12,15 +14,13 @@ public class AnnotationContainer {
         public String path;
         public Object value;
         public HashSet<ValidationError> errorTable;
-        public Field field;
         public Annotation annotation;
 
         public AnnotationActionConsumerArguments(Object value, HashSet<ValidationError> errorTable,
-                                                 Field field, Annotation annotation) {
-            this.path = field.getName();
+                                                 Annotation annotation, String path) {
+            this.path = path;
             this.value = value;
             this.errorTable = errorTable;
-            this.field = field;
             this.annotation = annotation;
         }
     }
@@ -28,8 +28,9 @@ public class AnnotationContainer {
     /**
      * Mapping of default Annotations to related Checkers
      */
-    private static final Map<Class<?>, Consumer<AnnotationActionConsumerArguments>> defaultAnnotationActionMap =
+    private static final Map<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>> defaultAnnotationActionMap =
             new HashMap<>();
+
     static {
         defaultAnnotationActionMap.put(Size.class, BaseAnnotationValidatorActions::checkSize);
         defaultAnnotationActionMap.put(NotNull.class, BaseAnnotationValidatorActions::checkNull);
@@ -41,10 +42,10 @@ public class AnnotationContainer {
         defaultAnnotationActionMap.put(AnyOf.class, BaseAnnotationValidatorActions::checkValues);
     }
 
-    public Map<Class<?>, Consumer<AnnotationActionConsumerArguments>> userAnnotationActionList = new HashMap<>();
+    public Map<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>> userAnnotationActionList = new HashMap<>();
 
 
-    public void Add(Class<?> annotation, Consumer<AnnotationActionConsumerArguments> action) {
+    public void Add(Class<? extends Annotation> annotation, Consumer<AnnotationActionConsumerArguments> action) {
         if (annotation == null || action == null)
             throw new NullPointerException();
         userAnnotationActionList.put(annotation, action);
@@ -57,7 +58,7 @@ public class AnnotationContainer {
      * @throws UnsupportedOperationException in case of put or any other operation
      *                                       that is not applicable to Collections.unmodifiableMap objects
      */
-    public static Map<Class<?>, Consumer<AnnotationActionConsumerArguments>> getDefaultAnnotationActionUnmodifiableMap() {
+    public static Map<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>> getDefaultAnnotationActionUnmodifiableMap() {
         return Collections.unmodifiableMap(defaultAnnotationActionMap);
     }
 }

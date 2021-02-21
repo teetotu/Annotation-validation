@@ -1,24 +1,36 @@
 package com.company;
 
-import com.company.annotations.*;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.company.annotations.Constrained;
+import com.company.annotations.NotNull;
 
 @Constrained
-public class Unrelated {
-    @NotNull
-    Set<@Positive Integer> notNullSet = new HashSet<>();
+class Unrelated1 {
+    Unrelated2 otherClassObject1 = new Unrelated2();
 
     @NotNull
-    static List<@NotNull String> integerList = new ArrayList<>();
+    String nullString1 = null;
 
-    static {
-        integerList.add(null);
-        integerList.add("String1");
-        integerList.add("String2");
-
-    }
 }
+
+@Constrained
+class Unrelated2 {
+    @NotNull
+    Unrelated3 otherClassObject2 = new Unrelated3();
+
+    @NotNull
+    String nullString2 = null;
+}
+
+@Constrained
+class Unrelated3 {
+    @NotNull
+    String nullString31 = null;
+    @NotNull
+    String nullString32 = null;
+    @NotNull
+    String nullString33 = null;
+    @NotNull
+    String nullString34 = null;
+}
+
+

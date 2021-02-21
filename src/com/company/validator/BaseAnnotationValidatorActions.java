@@ -66,7 +66,7 @@ public class BaseAnnotationValidatorActions {
     public static void checkRange(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value == null) return;
         if (Utils.getWrapperIntTypeMap().containsKey(args.value.getClass())) {
-            Long lng = ((Number) Utils.getWrapperIntTypeMap().get(args.value.getClass()).cast(args.value)).longValue();
+            long lng = ((Number) Utils.getWrapperIntTypeMap().get(args.value.getClass()).cast(args.value)).longValue();
             if (lng < ((InRange) args.annotation).min() || lng > ((InRange) args.annotation).max()) {
                 args.errorTable.add(new AnnotationValidationError("Value is out of range", args.path, lng));
             }
@@ -110,7 +110,7 @@ public class BaseAnnotationValidatorActions {
 
     public static void checkValues(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value instanceof String) {
-            if (!Arrays.stream(((AnyOf) args.annotation).value()).anyMatch(it -> it.equals(args.value))) {
+            if (Arrays.stream(((AnyOf) args.annotation).value()).noneMatch(it -> it.equals(args.value))) {
                 args.errorTable.add(
                         new AnnotationValidationError("Invalid argument", args.path, args.value));
             }
