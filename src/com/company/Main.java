@@ -4,7 +4,6 @@ import com.company.validator.AnnotationValidator;
 
 import java.lang.reflect.AnnotatedParameterizedType;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
 
@@ -17,12 +16,18 @@ public class Main {
             System.out.println(Arrays.toString(annotatedType.getDeclaredAnnotations()));
             StringBuilder offset = new StringBuilder("\t");
 
-            for (int j = 0; j < 2; j++) {
+            while (true){
                 offset.append("\t");
-                annotatedType = ((AnnotatedParameterizedType) annotatedType).getAnnotatedActualTypeArguments()[0];
+                try {
+                    annotatedType = ((AnnotatedParameterizedType) annotatedType).getAnnotatedActualTypeArguments()[0];
+                } catch (Exception e) {
+                    break;
+                }
                 System.out.println(offset.toString() + (annotatedType.getType()));
                 System.out.println(offset.toString() + Arrays.toString(annotatedType.getDeclaredAnnotations()));
             }
         });
     }
+
+
 }
