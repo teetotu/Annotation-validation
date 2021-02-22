@@ -1,14 +1,27 @@
 package com.company;
 
 import com.company.annotations.Constrained;
+import com.company.annotations.Negative;
 import com.company.annotations.NotNull;
+import com.company.annotations.Positive;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 @Constrained
 class Unrelated1 {
-    Unrelated2 otherClassObject1 = new Unrelated2();
+    static List<@NotNull @Negative List<@Positive @Negative List<@NotNull @Negative String>>> nullList = new LinkedList<>();
+    static HashSet<@NotNull List<@NotNull List<@NotNull Integer>>> nullSet = new HashSet<>();
 
-    @NotNull
-    String nullString1 = null;
+    Unrelated1() {
+        for (int i = 0; i < 3; i++) {
+            nullList.add(new LinkedList<>());
+            for (int j = 0; j < 3; j++) {
+                nullList.get(i).add(null);
+            }
+        }
+    }
 
 }
 

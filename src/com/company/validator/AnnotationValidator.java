@@ -3,6 +3,8 @@ package com.company.validator;
 import com.company.annotations.Constrained;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedParameterizedType;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -55,7 +57,18 @@ public class AnnotationValidator implements Validator {
                             e.printStackTrace();
                         }
                     }
+
                 }
         );
+    }
+
+    private static Set<ValidationError> validateList(Object object, Field field) {
+        HashSet<ValidationError> validationErrors = new LinkedHashSet<>();
+        if (field.getAnnotatedType() instanceof AnnotatedParameterizedType &&
+                List.class.isAssignableFrom(field.getType())) {
+            Arrays.stream(field.getAnnotatedType().getAnnotations()).forEach(System.out::println);
+        }
+
+        return validationErrors;
     }
 }
