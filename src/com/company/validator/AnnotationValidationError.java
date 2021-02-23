@@ -11,16 +11,25 @@ public class AnnotationValidationError implements ValidationError {
         this.failedValue = failedValue;
     }
 
+    /**
+     * @return validation error message
+     */
     @Override
     public String getMessage() {
         return message;
     }
 
+    /**
+     * @return failed value path
+     */
     @Override
     public String getPath() {
         return path;
     }
 
+    /**
+     * @return failed value
+     */
     @Override
     public Object getFailedValue() {
         return failedValue;

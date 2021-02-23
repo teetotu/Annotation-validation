@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class AnnotationContainer {
+    /**
+     * Utility class to pass arguments to the annotation checker consumer
+     */
     protected static class AnnotationActionConsumerArguments {
         public String path;
         public Object value;
@@ -28,8 +31,8 @@ public class AnnotationContainer {
     /**
      * Mapping of default Annotations to related Checkers
      */
-    private static final Map<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>> defaultAnnotationActionMap =
-            new HashMap<>();
+    private static final Map<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>>
+            defaultAnnotationActionMap = new HashMap<>();
 
     static {
         defaultAnnotationActionMap.put(Size.class, BaseAnnotationValidatorActions::checkSize);
@@ -42,10 +45,15 @@ public class AnnotationContainer {
         defaultAnnotationActionMap.put(AnyOf.class, BaseAnnotationValidatorActions::checkValues);
     }
 
-    public Map<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>> userAnnotationActionList = new HashMap<>();
+    public HashMap<Class<? extends Annotation>, Consumer<AnnotationActionConsumerArguments>> userAnnotationActionList =
+            new HashMap<>();
 
 
-    public void Add(Class<? extends Annotation> annotation, Consumer<AnnotationActionConsumerArguments> action) {
+    /**
+     * @param annotation Annotation you want to check
+     * @param action     Consumer<T> that performs some operation intended by the annotation
+     */
+    public void addAnnotationChecker(Class<? extends Annotation> annotation, Consumer<AnnotationActionConsumerArguments> action) {
         if (annotation == null || action == null)
             throw new NullPointerException();
         userAnnotationActionList.put(annotation, action);

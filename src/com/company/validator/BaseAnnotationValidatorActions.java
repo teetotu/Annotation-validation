@@ -10,7 +10,9 @@ import java.util.Set;
 
 public class BaseAnnotationValidatorActions {
     /**
-     * @param args AnnotationActionConsumerArguments
+     * Size annotation checker
+     *
+     * @param args Annotation checker arguments
      */
     public static void checkSize(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args == null) return;
@@ -38,6 +40,11 @@ public class BaseAnnotationValidatorActions {
         }
     }
 
+    /**
+     * NotNull annotation checker
+     *
+     * @param args Annotation checker arguments
+     */
     public static void checkNull(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value == null) {
             args.errorTable.add(new AnnotationValidationError("Value can not be null",
@@ -45,6 +52,11 @@ public class BaseAnnotationValidatorActions {
         }
     }
 
+    /**
+     * Positive/Negative annotation checker
+     *
+     * @param args Annotation checker arguments
+     */
     public static void checkSign(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value == null) return;
         if (Utils.getWrapperIntTypeMap().containsKey(args.value.getClass())) {
@@ -63,6 +75,11 @@ public class BaseAnnotationValidatorActions {
         }
     }
 
+    /**
+     * InRange annotation checker
+     *
+     * @param args Annotation checker arguments
+     */
     public static void checkRange(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value == null) return;
         if (Utils.getWrapperIntTypeMap().containsKey(args.value.getClass())) {
@@ -73,6 +90,11 @@ public class BaseAnnotationValidatorActions {
         }
     }
 
+    /**
+     * NotBlank annotation checker
+     *
+     * @param args Annotation checker arguments
+     */
     public static void checkIfBlank(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value == null) return;
         if (args.value instanceof String) {
@@ -83,6 +105,11 @@ public class BaseAnnotationValidatorActions {
         }
     }
 
+    /**
+     * NotEmpty annotation checker
+     *
+     * @param args Annotation checker arguments
+     */
     public static void checkIfEmpty(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value == null) return;
         if (args.value instanceof String) {
@@ -108,6 +135,11 @@ public class BaseAnnotationValidatorActions {
         }
     }
 
+    /**
+     * AnyOf annotation checker
+     *
+     * @param args Annotation checker arguments
+     */
     public static void checkValues(AnnotationContainer.AnnotationActionConsumerArguments args) {
         if (args.value instanceof String) {
             if (Arrays.stream(((AnyOf) args.annotation).value()).noneMatch(it -> it.equals(args.value))) {
